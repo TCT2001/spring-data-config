@@ -1,0 +1,65 @@
+<included>
+    <appender name="KpiLog"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/Kpi.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>${LOG_PATTERN}</Pattern>
+            <outputPatternAsHeader>true</outputPatternAsHeader>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS}/archived/KpiLog_%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <!-- each archived file, size max 10MB -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- total size of all archive files, if total size > 5GB, it will delete old archived file -->
+            <totalSizeCap>5GB</totalSizeCap>
+            <!-- 60 days to keep -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="KPI" level="info" additivity="false">
+        <appender-ref ref="KpiLog"/>
+    </logger>
+
+    <appender name="AdminLog"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/Admin.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>${LOG_PATTERN}</Pattern>
+            <outputPatternAsHeader>true</outputPatternAsHeader>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS}/archived/AdminLog_%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <!-- each archived file, size max 10MB -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- total size of all archive files, if total size > 5GB, it will delete old archived file -->
+            <totalSizeCap>5GB</totalSizeCap>
+            <!-- 60 days to keep -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+    </appender>
+    <logger name="ADMIN" level="info" additivity="false">
+        <appender-ref ref="AdminLog"/>
+    </logger>
+
+    <appender name="AuthLog"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/Auth.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>${LOG_PATTERN}</Pattern>
+            <outputPatternAsHeader>true</outputPatternAsHeader>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS}/archived/AuthLog_%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <!-- each archived file, size max 10MB -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- total size of all archive files, if total size > 5GB, it will delete old archived file -->
+            <totalSizeCap>5GB</totalSizeCap>
+            <!-- 60 days to keep -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+    </appender>
+    <logger name="AUTH" level="info" additivity="false">
+        <appender-ref ref="AuthLog"/>
+    </logger>
+</included>

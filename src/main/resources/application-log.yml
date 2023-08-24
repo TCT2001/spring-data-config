@@ -1,0 +1,91 @@
+spring:
+  main:
+    banner-mode: off
+  jpa:
+    properties:
+      hibernate:
+        generate_statistics: true
+---
+logging:
+  level:
+    org:
+      springframework.security.web.FilterChainProxy: DEBUG
+---
+logging:
+  level:
+    org:
+      springframework:
+        amqp: DEBUG
+---
+logging:
+  level:
+    com:
+      zaxxer:
+        hikari:
+          HikariDataSource: 'WARN'
+---
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          context:
+            scope:
+              GenericScope: 'WARN'
+        orm:
+          jpa:
+            LocalContainerEntityManagerFactoryBean: 'OFF'
+        data:
+          repository:
+            config:
+              RepositoryConfigurationDelegate: 'OFF'
+        boot:
+          web:
+            servlet:
+              context:
+                ServletWebServerApplicationContext: 'WARN'
+      apache:
+        catalina:
+          core:
+            StandardService: 'WARN'
+            StandardEngine: 'WARN'
+---
+logging:
+  level:
+    org:
+      hibernate:
+        stat: 'DEBUG'
+        Version: 'WARN'
+        annotations:
+          common:
+            Version: 'WARN'
+        engine:
+          transaction:
+            jta:
+              platform:
+                internal:
+                  JtaPlatformInitiator: 'WARN'
+        dialect:
+          Dialect: 'WARN'
+        metamodel:
+          internal:
+            MetadataContext: OFF
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+
+---
+logging:
+  level:
+    org:
+      springframework:
+        transaction:
+          interceptor: TRACE
+
+--- # Log Every thing in DEBUG level spring
+#logging:
+#  level:
+#    org:
+#      springframework: DEBUG

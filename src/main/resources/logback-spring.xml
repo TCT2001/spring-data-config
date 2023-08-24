@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProfile name="staging, production">
+        <include resource="logback-production.xml"/>
+    </springProfile>
+
+    <springProfile name="dev">
+        <include resource="logback-dev.xml"/>
+        <property name="DEV_MODE" value="1" />
+    </springProfile>
+
+    <!--Define Variable-->
+    <property name="LOGS" value="../logs" />
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd} | %d{HH:mm:ss.SSS} | %blue(%-5.5t) | %highlight(%-5level) | %cyan(%-25.25logger{25}) | %-4.4L | %m%n"/>
+
+    <if condition='isDefined("DEV_MODE")'>
+        <then>
+            <property name="LOG_PATTERN" value="%blue(%-5.5t) | %highlight(%-5level) | %cyan(%-25.25logger{25}) | %-4.4L | %m%n"/>
+        </then>
+    </if>
+
+    <!--For Tomcat Deploy-->
+    <if condition='isDefined("catalina.home")'>
+        <then>
+            <property name="LOGS" value="${catalina.home}/logs"/>
+        </then>
+        <else>
+            <property name="LOGS" value="../../../target/logs"/>
+        </else>
+    </if>
+
+    <!--LOG ALL TO CONSOLE-->
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>${LOG_PATTERN}</Pattern>
+        </layout>
+    </appender>
+
+    <!--LOG everything at info level to console with root name: tct.* === package name-->
+    <root level="info">
+        <appender-ref ref="Console" />
+    </root>
+</configuration>
